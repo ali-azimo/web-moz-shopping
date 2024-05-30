@@ -27,7 +27,7 @@ const api = process.env.API_URL;
 app.use(`${api}/categories`, categRouter);
 app.use(`${api}/products`, prodRouter)
 app.use(`${api}/users`, userRouter);
-app.use(`${api}/order`, orderRouter);
+app.use(`${api}/orders`, orderRouter);
 
 mongoose.connect(process.env.CONNECTION_STRING, {
     dbName: 'web-shopping'
@@ -36,7 +36,6 @@ mongoose.connect(process.env.CONNECTION_STRING, {
 }).catch((err) => {
     console.log(err);
 })
-
 
 app.listen(3000, () => {
     console.log('Server is running http://localhost:3000');

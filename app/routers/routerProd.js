@@ -3,7 +3,30 @@ const {Product} = require('../model/modelPro');
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const multer = require('multer');
 
+
+const FILE_TYPE_MAP = {
+    'image/png':'png',
+    'image/jpeg':'pjeg',
+    'image/jpg':'jpg'
+}
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        const isValid = FILE_TYPE_MAP[file.mimetype];
+        if (isValid) {
+            uploadError = null
+        }
+      cb(uploadError, 'public/uploads')
+    },
+    filename: function (req, file, cb) {
+        const fileName = file.originalname.split(' ').join('-');
+        const extension = FILE_TYPE_MAP[file.mimetype];
+      cb(null, `${fileName}-${Date.now()}.${extension}`)
+    }
+  })
+  
+  const uploadOptions = multer({ storage: storage })
 
 router.get(`/`, async (req, res) => {
     //.select('name image price -_id')
@@ -17,16 +40,22 @@ router.get(`/`, async (req, res) => {
     }
     res.send(productList);
 })
-router.post(`/`, async (req, res) => {
+router.post(`/`,uploadOptions.single('image'), async (req, res) => {
     //validation data
     const category = await Category.findById(req.body.category);
     if (!category) return res.status(400).send('Invalid category');
 
+    const file = req.file;
+    if (!file) return res.status(400).send('There is no image in the request');
+
+    const fileName = req.file.filename
+    const basePath = `${req.protocol}://${req.get('host')}/public/upload`;
+
     let product = new Product({
         name: req.body.name,
-        descripion: req.body.descripion,
+        description: req.body.description,
         richDescription: req.body.richDescription,
-        image: req.body.image,
+        image: `${basePath}${fileName}`,
         brand: req.body.brand,
         price: req.body.price,
         category: req.body.category,

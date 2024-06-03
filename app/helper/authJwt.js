@@ -12,6 +12,7 @@ function auth() {
         path: [
             //Not allowing others post infor, everything after prodcut
             //regular expression
+            { url: /\/public\/upload(.*)/, methods: ['GET', 'OPTIONS'] },
             { url: /\/api\/v1\/products(.*)/, methods: ['GET', 'OPTIONS'] },
             { url: /\/api\/v1\/categories(.*)/, methods: ['GET', 'OPTIONS'] },
             `${api}/users/login`,

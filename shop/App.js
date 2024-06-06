@@ -2,12 +2,13 @@ import { StausBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from 'react-native';
 
-import TodoList from './Components/TodoList';
+//Screens
+import ProdcutContainer from "./screens/Products/ProductContainer";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <TodoList/>
+      <ProdcutContainer/>
     </View>
   )
 }

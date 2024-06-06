@@ -1,0 +1,36 @@
+[{
+    "_id":{
+        "$oid":"664561937e588cb6aa3e43ba"
+    },
+    "image":" Qualquer entrada",
+    "brand":"PS3",
+    "proce":"250",
+    "rating":1,
+    "numReviws":0,
+    "isFeatured":true,
+    "nama":"FIFA 20",
+    "description":"Good play",
+    "category":{
+        "$oid": "664561937e588cb6aa3e43ba"
+    },
+    "countInStock": 25,
+    "__v": 0
+},{
+    "_id":{
+        "$oid":"664561937e588cb6aa3e43be"
+    },
+    "image":" Qualquer entrada",
+    "brand":"BW2",
+    "proce":"400",
+    "rating":1,
+    "numReviws":0,
+    "isFeatured":true,
+    "nama":"Books",
+    "description":"Good for life",
+    "category":{
+        "$oid": "664561937e588cb6aa3e43br"
+    },
+    "countInStock": 40,
+    "__v": 0
+}
+]
